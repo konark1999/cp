@@ -1,0 +1,49 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long int
+vector <ll> g[100009];
+ll visited[100009];
+void dfs(ll cur)
+{
+	visited[cur]=1;
+	for(ll i=0;i<g[cur].size();i++)
+	{
+		ll node=g[cur][i];
+		if(visited[node]==0)
+		{
+			dfs(node);
+		}
+	}
+	return;
+}
+int main()
+{
+	ll t,n,m,i,x,y,count;
+	cin>>t;
+	while(t--)
+	{
+		count=0;
+		cin>>n;
+		cin>>m;
+		for(i=0;i<m;i++)
+		{
+			cin>>x>>y;
+			g[x].push_back(y);
+			g[y].push_back(x);
+		}
+		for(i=0;i<n;i++)
+		{
+			if(visited[i]==0)
+			{
+				count++;
+				dfs(i);
+			}
+		}
+		cout<<count<<"\n";
+		for(i=0;i<n;i++)
+		{
+			g[i].clear();
+			visited[i]=0;
+		}
+	}
+}
