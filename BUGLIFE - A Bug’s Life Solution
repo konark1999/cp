@@ -1,0 +1,77 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long int
+vector <ll> g[2005];
+#define mod 1000000007
+ll visited[2005],color[2005],flag;
+bool dfs(ll cur,ll x)
+{
+	if(color[cur]!=-1 && color[cur]!=x)
+		return false;
+	visited[cur]=1;
+	color[cur]=x;
+	bool a=true;
+	for(ll i=0;i<g[cur].size();i++)
+	{
+		ll node=g[cur][i];
+		if(color[node]==-1)
+		{
+			a&=dfs(node,1-x);
+			//cout<<a<<"\n";
+		}
+		if(color[node]!=-1 && color[node]!=1-x)
+			return false;
+		if(!a)
+			return false;
+	}
+	return true;
+}
+int main()
+{
+	ll t,n,m,s,d,i,x,y,j;
+	cin>>t;
+	for(j=1;j<=t;j++)
+	{
+		flag=0;
+		cin>>n>>m;
+		for(i=1;i<=n;i++)
+		{
+			color[i]=-1;
+		}
+		for(i=0;i<m;i++)
+		{
+			cin>>x>>y;
+			g[x].push_back(y);
+			g[y].push_back(x);
+		}
+		//ll temp=g[d].size();
+		//cout<<temp<<"\n";
+		bool k=true,temp;
+		for(i=1;i<=n;i++)
+		{
+			if(visited[i]==0)
+			{
+				//cout<<temp<<" ";
+				temp=dfs(i,1);
+				//cout<<temp<<"\n";
+			}
+			//cout<<k<<"\n";
+			k=k&temp;
+			//cout<<k<<"\n";
+		}
+		//bool k=dfs(1,1);
+		if(k==false)
+		{
+			cout<<"Scenario #"<<j<<":\nSuspicious bugs found!\n";
+		}
+		else
+		{
+			cout<<"Scenario #"<<j<<":\nNo suspicious bugs found!\n";
+		}
+		for(i=1;i<=n;i++)
+		{
+			g[i].clear();
+			visited[i]=0;
+		}
+	}
+}
