@@ -1,0 +1,19 @@
+for _ in range(int(input())):
+    n=int(input())
+    v="AEIOU"
+    l=list(input().strip())
+    if n==1:
+        print("No")
+        continue 
+    
+    if  l[0] in v and l[-1] in v:
+        print('Yes')
+        continue 
+    f=0 
+    for i in range(0,n-1):
+        if  l[i] in v and l[i+1] in v:
+            f=1 
+    if f:
+        print("Yes")
+    else:
+        print('No')
