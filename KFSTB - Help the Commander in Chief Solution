@@ -1,0 +1,47 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long int
+vector <ll> g[10009];
+#define mod 1000000007
+ll visited[10009];
+ll dfs(ll cur,ll d)
+{
+	if(cur==d)
+		return 1;
+	ll k=0;
+	if(visited[cur]!=-1)
+		return visited[cur];
+	for(ll i=0;i<g[cur].size();i++)
+	{
+		ll node=g[cur][i];
+	 	k+=dfs(node,d);
+		k=k%mod;
+	}
+	visited[cur]=k;
+	return visited[cur];
+}
+int main()
+{
+	ll t,n,m,s,d,i,x,y;
+	cin>>t;
+	while(t--)
+	{
+		cin>>n>>m>>s>>d;
+		for(i=1;i<=n;i++)
+		{
+			visited[i]=-1;
+		}
+		for(i=0;i<m;i++)
+		{
+			cin>>x>>y;
+			g[x].push_back(y);
+			//g[y].push_back(x);
+		}
+		//ll temp=g[d].size();
+		//cout<<temp<<"\n";
+		ll k=dfs(s,d);
+		cout<<k<<"\n";
+		for(i=1;i<=n;i++)
+			g[i].clear();
+	}
+}
