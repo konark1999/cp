@@ -1,0 +1,26 @@
+#include<bits/stdc++.h>
+using namespace std;
+#define ll long long int
+ll *a=new ll[1000000009];
+ll dp(ll n)
+{
+	if(n<2)
+		return n;
+	if(a[n]!=0)
+		return a[n];
+	else
+	{
+		a[n]=max(n,dp(n/2)+dp(n/3)+dp(n/4));
+		return a[n];
+	}
+}
+int main()
+{
+	ll n;
+	memset(a,0,sizeof(a));
+	while(cin>>n)
+	{
+		cout<<dp(n)<<"\n";
+	//	memset(a,0,sizeof(a));
+	}
+}
