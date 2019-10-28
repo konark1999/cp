@@ -18,7 +18,9 @@ void dfs(ll cur)
 int main()
 {
 	ll n,m,x,y,i;
+	//n is no of vertices and m is no of edges..
 	cin>>n>>m;
+	//x and y are pair of vertices that are connected..
 	for(i=0;i<m;i++)
 	{
 		cin>>x>>y;
